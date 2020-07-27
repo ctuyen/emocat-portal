@@ -44,14 +44,14 @@ function Header(props) {
             <div className="relative">
               {/* Item active: "text-gray-900", Item inactive: "text-gray-500" */}
               <button
-                onClick={() => {setSolutionsMenu(!solutionsMenu); setMoreMenu(false)}}
+                onClick={() => {setMoreMenu(false); setSolutionsMenu(!solutionsMenu);}}
                 type="button"
-                className={`${setSolutionsMenu ? 'text-gray-900' : 'text-gray-500'} text-gray-500 group inline-flex items-center space-x-2 text-base leading-6 font-medium hover:text-gray-900 focus:outline-none focus:text-gray-900 transition ease-in-out duration-150`}
+                className={`${solutionsMenu ? 'text-gray-900' : 'text-gray-500'} group inline-flex items-center space-x-2 text-base leading-6 font-medium hover:text-gray-900 focus:outline-none focus:text-gray-900 transition ease-in-out duration-150`}
               >
                 <span>Solutions</span>
                 {/* Item active: "text-gray-600", Item inactive: "text-gray-400" */}
                 <svg
-                  className={`${setSolutionsMenu ? 'text-gray-600' : 'text-gray-400'} text-gray-400 h-5 w-5 group-hover:text-gray-500 group-focus:text-gray-500 transition ease-in-out duration-150`}
+                  className={`${solutionsMenu ? 'text-gray-600' : 'text-gray-400'} h-5 w-5 group-hover:text-gray-500 group-focus:text-gray-500 transition ease-in-out duration-150`}
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -78,14 +78,14 @@ function Header(props) {
             <div className="relative">
               {/* Item active: "text-gray-900", Item inactive: "text-gray-500" */}
               <button
-                onClick={() => {setMoreMenu(!moreMenu); setSolutionsMenu(false)}}
+                onClick={() => {setSolutionsMenu(false); setMoreMenu(!moreMenu);}}
                 type="button"
-                className={`${setMoreMenu ? 'text-gray-900' : 'text-gray-500'} text-gray-500 group inline-flex items-center space-x-2 text-base leading-6 font-medium hover:text-gray-900 focus:outline-none focus:text-gray-900 transition ease-in-out duration-150`}
+                className={`${moreMenu ? 'text-gray-900' : 'text-gray-500'} text-gray-500 group inline-flex items-center space-x-2 text-base leading-6 font-medium hover:text-gray-900 focus:outline-none focus:text-gray-900 transition ease-in-out duration-150`}
               >
                 <span>Menu</span>
                 {/* Item active: "text-gray-600", Item inactive: "text-gray-400" */}
                 <svg
-                  className={`${setMoreMenu ? 'text-gray-900' : 'text-gray-500'} text-gray-400 h-5 w-5 group-hover:text-gray-500 group-focus:text-gray-500 transition ease-in-out duration-150`}
+                  className={`${moreMenu ? 'text-gray-900' : 'text-gray-500'} text-gray-400 h-5 w-5 group-hover:text-gray-500 group-focus:text-gray-500 transition ease-in-out duration-150`}
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >

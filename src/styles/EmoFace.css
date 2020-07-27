@@ -1,0 +1,30 @@
+.fadeOut {
+    animation: fadeOutUp 2s ease;
+    animation-fill-mode: forwards;
+}
+
+.fadeIn {
+    animation: my-fadein-animation 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes my-fadein-animation {
+    0%, 30% {
+        opacity: 0;
+        display: none;
+        width: 0;
+    }
+    to {
+        display: block;
+        opacity: 1;
+    }
+}
+@keyframes fadeOutUp {
+    from {
+        transform: none;
+    }
+    to {
+        transform: translate(60vw, -50%) rotate(0.5turn) scale(0, 0);
+        display: none;
+    }
+}
