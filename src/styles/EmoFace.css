@@ -1,5 +1,10 @@
-.fadeOut {
+.fadeOutUp {
     animation: fadeOutUp 2s ease;
+    animation-fill-mode: forwards;
+}
+
+.fadeOut {
+    animation: fadeOut 1s ease;
     animation-fill-mode: forwards;
 }
 
@@ -25,6 +30,15 @@
     }
     to {
         transform: translate(60vw, -50%) rotate(0.5turn) scale(0, 0);
+        display: none;
+    }
+}
+@keyframes fadeOut {
+    from {
+        transform: none;
+    }
+    to {
+        opacity: 0;
         display: none;
     }
 }

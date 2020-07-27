@@ -2,52 +2,52 @@ import React, {useState, useRef} from 'react';
 import './styles/EmoFace.css';
 import smile from './smile.svg';
 import sad from './sad.svg';
+import respondFace from './undraw_respond_8wjt.svg';
 
 function EmoFace() {
-  const [step, setStep] = useState(0), [imgClass, setImgClass] = useState('hidden');
+  const [emo, setEmo] = useState('smile'), [imgClass, setImgClass] = useState('');
   const imgRef = useRef(null);
 
-  // document.onkeyup = event => {
-  //   if (document.activeElement === imgRef.current) return;
-  //   if (event.isComposing || event.keyCode === 229) {
-  //     return;
-  //   }
-  //   if (event.code === 'Enter') handleNextStep();
-  // }
+  const handleNextStep = (emotion) => {
+    console.log("emotion  ", emotion);
 
-  const handleNextStep = () => {
-    console.log("step  ", step);
-
-    switch (step) {
-      case 0: {
-        imgRef.current.src = smile;
-        setImgClass('fadeIn');
+    switch (emotion) {
+      case 'sad': {
+        setImgClass('fadeOut')
+        setTimeout(() => {
+          imgRef.current.src = sad;
+          setImgClass('fadeIn');
+        }, 1000)
+        setEmo('toSmile');
         break;
       }
-      case 1: {
-        setImgClass('fadeOut');
+      case 'smile': {
+        setImgClass('fadeOut')
+        setTimeout(() => {
+          imgRef.current.src = smile;
+          setImgClass('fadeIn');
+        }, 1000)
+        setEmo('toSad');
         break;
       }
-      case 2: {
-        imgRef.current.src = sad;
-        setImgClass('fadeIn');
-        break;
+      default: {
+        setImgClass('fadeOutUp')
+        setTimeout(() => {
+          imgRef.current.src = respondFace;
+          setImgClass('fadeIn');
+        }, 2000)
+        if (emo === 'toSad') setEmo('sad');
+        if (emo === 'toSmile') setEmo('smile');
       }
-      case 3: {
-        setImgClass('fadeOut');
-        break;
-      }
-      default:
     }
-    step < 3 ? setStep(step + 1) : setStep(0);
   }
   return (
     <div>
       <div className="flex justify-center mt-8">
-        <img ref={imgRef} className={`${imgClass} w-1/2 md:w-1/4`} src={smile} alt=""/>
+        <img ref={imgRef} className={`${imgClass} w-1/2 md:w-1/4`} src={respondFace} alt=""/>
       </div>
       <div className={'flex justify-center absolute w-full'} style={{position: 'absolute',bottom: '2rem'}}>
-        <button type="button" className={`text-xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`} onClick={() => handleNextStep()}>Check emotion</button>
+        <button type="button" className={`text-xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`} onClick={() => handleNextStep(emo)}>Check emotion</button>
       </div>
     </div>
   )
