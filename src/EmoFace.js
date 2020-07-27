@@ -7,12 +7,13 @@ function EmoFace() {
   const [step, setStep] = useState(0), [imgClass, setImgClass] = useState('hidden');
   const imgRef = useRef(null);
 
-  document.onkeyup = event => {
-    if (event.isComposing || event.keyCode === 229) {
-      return;
-    }
-    if (event.code === 'Enter') handleNextStep();
-  }
+  // document.onkeyup = event => {
+  //   if (document.activeElement === imgRef.current) return;
+  //   if (event.isComposing || event.keyCode === 229) {
+  //     return;
+  //   }
+  //   if (event.code === 'Enter') handleNextStep();
+  // }
 
   const handleNextStep = () => {
     console.log("step  ", step);
@@ -42,9 +43,11 @@ function EmoFace() {
   }
   return (
     <div>
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-8">
         <img ref={imgRef} className={`${imgClass} w-1/2 md:w-1/4`} src={smile} alt=""/>
-        {/*<img className={`${sadCls} w-1/2 md:w-1/4`} src={sad} alt=""/>*/}
+      </div>
+      <div className={'flex justify-center absolute w-full'} style={{position: 'absolute',bottom: '2rem'}}>
+        <button type="button" className={`text-xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`} onClick={() => handleNextStep()}>Check emotion</button>
       </div>
     </div>
   )
