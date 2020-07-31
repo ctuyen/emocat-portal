@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import LogoCat from './khao-manee-cat.svg';
 
 function Header(props) {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -13,8 +14,8 @@ function Header(props) {
           <a href="#" className="flex">
             <img
               className="h-8 w-auto sm:h-10"
-              src="https://tailwindui.com/img/logos/workflow-mark-on-white.svg"
-              alt="Workflow"
+              src={LogoCat}
+              alt="EmoCat Logo"
             />
           </a>
         </div>

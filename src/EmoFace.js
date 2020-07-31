@@ -6,13 +6,13 @@ import happy from './happy.svg';
 import respondFace from './undraw_respond_8wjt.svg';
 
 function EmoFace() {
-  const [emo, setEmo] = useState('toStart'), [imgClass, setImgClass] = useState(''), [info, setInfo] = useState('HEY!  I\'m Emo Cat');
+  const [emo, setEmo] = useState('toStart'), [imgClass, setImgClass] = useState(''), [info, setInfo] = useState("HEY!  I'm Emo Cat");
   const imgRef = useRef(null);
 
   document.onkeydown = (e) => {
     if (e.code !== 'Space' || e.isComposing || e.keyCode === 229) {
       return;
-    };
+    }
 
     handleNextStep(emo);
   };
@@ -25,7 +25,7 @@ function EmoFace() {
         setTimeout(() => {
           imgRef.current.src = sad;
           setImgClass('fadeIn');
-          setInfo('DISAPPOINTED!');
+          setInfo('DISSATISFIED!');
           setEmo('toSmile');
         }, 1000)
         break;
