@@ -18,9 +18,53 @@ function EmoFace() {
     handleNextStep(emo);
   };
 
-  const handleNextStep = (emotion) => {
+  let shouldStop = false;
+  let stopped = false;
+  let audioRes = null;
+  let count = 0;
+  let mediaRecorder;
+  const recordedChunks = [];
+  // const downloadLink = document.getElementById('download');
+  // const stopButton = document.getElementById('stop');
+  //
+  // stopButton.addEventListener('click', function() {
+  //   shouldStop = true;
+  // });
+
+  const handleRecord = function(stream) {
+    const options = {mimeType: 'audio/webm'};
+    const mediaRecorder = new MediaRecorder(stream, options);
+    // setTimeout(() => {mediaRecorder.stop(); stopped = true; console.log("stopped", count)}, 2000);
+
+    mediaRecorder.ondataavailable = (e) => {
+      count++;
+      console.log("stop", count)
+      if (e.data.size > 0) {
+        recordedChunks.push(e.data);
+      }
+      //
+      // if(shouldStop === true && stopped === false) {
+      //   mediaRecorder.stop();
+      //   stopped = true;
+      // }
+    };
+
+    mediaRecorder.onstop = () => {
+      console.log("recorded chunks", recordedChunks);
+      audioRes = recordedChunks;
+    };
+
+    mediaRecorder.start();
+    console.log("state", mediaRecorder.state)
+  };
+
+  const handleNextStep = async (emotion) => {
     switch (emotion) {
       case 'sad': {
+        shouldStop = true;
+        mediaRecorder.stop()
+        console.log("audio", audioRes);
+
         setImgClass('fadeOut');
         setInfo('PROCESSING...')
         setTimeout(() => {
@@ -32,6 +76,10 @@ function EmoFace() {
         break;
       }
       case 'smile': {
+        shouldStop = true;
+        mediaRecorder.stop()
+        console.log("audio", audioRes)
+
         setImgClass('fadeOut');
         setInfo('PROCESSING...');
         setTimeout(() => {
@@ -43,6 +91,31 @@ function EmoFace() {
         break;
       }
       default: {
+        console.log("start recording here");
+        shouldStop = false;
+        stopped = false;
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+        mediaRecorder = new MediaRecorder(stream)
+        mediaRecorder.ondataavailable = (e) => {
+          count++;
+          console.log("dataavailable", count)
+          if (e.data.size > 0) {
+            recordedChunks.push(e.data);
+          }
+          //
+          // if(shouldStop === true && stopped === false) {
+          //   mediaRecorder.stop();
+          //   stopped = true;
+          // }
+        };
+
+        mediaRecorder.onstop = () => {
+          console.log("stop recorded chunks", recordedChunks);
+          audioRes = recordedChunks;
+        };
+        mediaRecorder.start()
+        console.log("stream", stream, mediaRecorder)
+
         setImgClass('fadeOutUp');
         setInfo('LISTENING...');
         setTimeout(() => {
